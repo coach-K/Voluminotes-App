@@ -18,7 +18,7 @@ public enum Config {
     /**
      * Location to MySQL database
      */
-    URL("jdbc:sqldroid:/data/data/com.andela.note/main.sqlite"),
+    URL("jdbc:sqldroid:/data/data/com.andela.voluminotesapp/andd.sqlite"),
 
     /**
      * MySQL database to establish connection
