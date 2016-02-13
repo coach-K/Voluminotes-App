@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NoteLib</string>
+    <string name="general_note">NOTE</string>
 </resources>
