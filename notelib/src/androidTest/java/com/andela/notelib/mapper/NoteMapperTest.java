@@ -1,6 +1,5 @@
 package com.andela.notelib.mapper;
 
-import android.test.ApplicationTestCase;
 
 import com.andela.notelib.note.PaperNote;
 
