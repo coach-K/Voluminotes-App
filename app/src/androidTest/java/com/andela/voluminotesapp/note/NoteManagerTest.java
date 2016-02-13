@@ -31,7 +31,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Created by andela on 2/13/16.
  */
-public class NoteManagerTest  extends TestCase{
+public class NoteManagerTest extends TestCase {
 
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -141,8 +141,8 @@ public class NoteManagerTest  extends TestCase{
         assertEquals(this.noteManager.getNotesSize(), 2);
 
         NoteList<Note> notes = this.noteManager.getAllNotes();
-        assertEquals(((PaperNote)notes.getNote(0)).getNote(), paperNote.getNote());
-        assertEquals(((PaperNote)notes.getNote(1)).getNote(), note.getNote());
+        assertEquals(((PaperNote) notes.getNote(0)).getNote(), paperNote.getNote());
+        assertEquals(((PaperNote) notes.getNote(1)).getNote(), note.getNote());
     }
 
     public void testGetAllTrashNotes() throws Exception {
@@ -157,8 +157,8 @@ public class NoteManagerTest  extends TestCase{
         assertEquals(this.noteManager.getTrashNotesSize(), 2);
 
         NoteList<Note> notes = this.noteManager.getAllTrashNotes();
-        assertEquals(((PaperNote)notes.getNote(0)).getNote(), paperNote.getNote());
-        assertEquals(((PaperNote)notes.getNote(1)).getNote(), note.getNote());
+        assertEquals(((PaperNote) notes.getNote(0)).getNote(), paperNote.getNote());
+        assertEquals(((PaperNote) notes.getNote(1)).getNote(), note.getNote());
     }
 
     public void testGetNote() throws Exception {

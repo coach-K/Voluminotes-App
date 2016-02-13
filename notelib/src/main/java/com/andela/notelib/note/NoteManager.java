@@ -16,7 +16,7 @@ public class NoteManager {
     private NoteList<Note> trashNotes = new NoteList<>();
     private Context context;
 
-    public NoteManager(Context context, String tableName ) throws Exception {
+    public NoteManager(Context context, String tableName) throws Exception {
         this.noteDBWriter = new NoteDBWriter<>(tableName);
         this.notes.addAllOrderedNote(this.noteDBWriter.selectAllNote(NOTES));
         this.trashNotes.addAllOrderedNote(this.noteDBWriter.selectAllNote(TRASH));
@@ -69,12 +69,12 @@ public class NoteManager {
         this.noteDBWriter.deleteNote(note.getId());
     }
 
-    public void deleteAllTrash(){
+    public void deleteAllTrash() {
         this.trashNotes.clear();
         this.noteDBWriter.deleteAlNote(TRASH);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         this.notes.clear();
         this.trashNotes.clear();
         this.noteDBWriter.deleteAlNote(NOTES);

@@ -26,7 +26,7 @@ public class NoteDBWriter<T extends Note> {
         initializeDatabaseConnection();
     }
 
-    private void getColumns(){
+    private void getColumns() {
         this.id = Folders.ID.getColumns();
         this.folderid = Folders.FOLDERID.getColumns();
         this.trash = Folders.TRASH.getColumns();
@@ -156,7 +156,7 @@ public class NoteDBWriter<T extends Note> {
         return fields;
     }
 
-    private void createFields(){
+    private void createFields() {
         fields = new ArrayList<>();
         fields.add(this.id);
         fields.add(this.folderid);

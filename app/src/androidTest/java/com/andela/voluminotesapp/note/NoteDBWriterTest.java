@@ -20,7 +20,7 @@ public class NoteDBWriterTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         noteDBWriter = new NoteDBWriter<>("helloTable");
-        paperNote = new PaperNote("Everybody","Beautiful people", "Arial", 23, 0);
+        paperNote = new PaperNote("Everybody", "Beautiful people", "Arial", 23, 0);
         paperNote.setId(0);
         paperNote.setFolderId(0);
         noteDBWriter.insertNote(paperNote);
@@ -61,7 +61,7 @@ public class NoteDBWriterTest extends TestCase {
         assertEquals(note.getNote(), content);
     }
 
-    private void updateNote(){
+    private void updateNote() {
         String title = "Hero";
         paperNote.setTitle(title);
         paperNote.setNote(content);
