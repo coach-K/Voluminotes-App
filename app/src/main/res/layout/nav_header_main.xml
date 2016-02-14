@@ -10,8 +10,8 @@
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:scaleType="centerCrop"
         android:src="@drawable/splash" />
 
     <ImageView

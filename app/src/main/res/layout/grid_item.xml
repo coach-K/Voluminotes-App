@@ -12,21 +12,21 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:src="@drawable/topper"/>
+        android:src="@drawable/topper" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="25dp"
             android:layout_marginBottom="2dp"
+            android:layout_marginTop="10dp"
             android:text="Jan 23, 2016"
             android:textStyle="italic" />
 
