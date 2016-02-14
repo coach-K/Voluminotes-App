@@ -1,32 +1,17 @@
 package com.andela.voluminotesapp.note;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.ViewAssertion;
-import android.support.test.espresso.assertion.ViewAssertions;
-import android.support.test.espresso.core.deps.guava.collect.Iterables;
 import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
-import android.support.test.runner.lifecycle.Stage;
-import android.test.ActivityInstrumentationTestCase2;
 
 import com.andela.notelib.note.Note;
 import com.andela.notelib.note.NoteList;
 import com.andela.notelib.note.NoteManager;
 import com.andela.notelib.note.PaperNote;
 import com.andela.voluminotesapp.activities.MainActivity;
-import com.andela.voluminotesapp.activities.SplashActivity;
 
 import junit.framework.TestCase;
 
 import org.junit.Rule;
-
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by andela on 2/13/16.
