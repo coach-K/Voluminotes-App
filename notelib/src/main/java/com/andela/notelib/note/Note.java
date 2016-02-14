@@ -3,7 +3,7 @@ package com.andela.notelib.note;
 
 import android.os.Parcelable;
 
-public abstract class Note implements Parcelable {
+public abstract class Note implements Parcelable, Comparable<Note> {
     private int id;
     private int folderId;
     private int trash;
@@ -43,5 +43,10 @@ public abstract class Note implements Parcelable {
 
     public void setTrash(int trash) {
         this.trash = trash;
+    }
+
+    @Override
+    public int compareTo(Note another) {
+        return this.getId() > another.getId() ? -1 : 1;
     }
 }

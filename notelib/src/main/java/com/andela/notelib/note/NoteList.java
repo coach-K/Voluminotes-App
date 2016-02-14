@@ -62,13 +62,6 @@ public class NoteList<T extends Note> extends ArrayList<T> {
         return false;
     }
 
-    public void removeFolderNotes(int index) {
-        for (T t : this) {
-            if (t.getFolderId() == index)
-                remove(t);
-        }
-    }
-
     public boolean containsAllNote(Collection<T> elements) {
         boolean flag = false;
         for (T t : elements) {
