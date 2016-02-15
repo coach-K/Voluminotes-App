@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Import" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@mipmap/dashboard_dark"
+            android:title="@string/dashboard" />
+        <item
+            android:id="@+id/nav_allNotes"
+            android:icon="@mipmap/book"
+            android:title="@string/all_notes" />
+        <item
+            android:id="@+id/nav_journal"
+            android:icon="@mipmap/note_dark"
+            android:title="@string/note" />
+        <item
+            android:id="@+id/nav_todo"
+            android:icon="@mipmap/todo"
+            android:title="@string/plans" />
+        <item
+            android:id="@+id/nav_voice"
+            android:icon="@mipmap/mic_dark"
+            android:title="@string/voice_notes" />
+        <item
+            android:id="@+id/nav_drawings"
+            android:icon="@mipmap/paint"
+            android:title="@string/drawings" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/more">
         <menu>
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
+            <item
+                android:id="@+id/nav_trash"
+                android:icon="@mipmap/trash_dark"
+                android:title="@string/trash" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@mipmap/settings_dark"
+                android:title="@string/action_settings" />
         </menu>
     </item>
 
