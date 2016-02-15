@@ -18,6 +18,7 @@ public enum Folders {
     public static final int STATIC_AUDIO_NOTE = 2;
     public static final int STATIC_DRAW_NOTE = 3;
     public static final int STATIC_GENERAL_NOTE = 4;
+    public static final int STATIC_SINGLE_NOTE = 1;
 
     Folders(int folder){
         this.folder = folder;
