@@ -148,7 +148,7 @@ public class NoteListTest extends TestCase {
     public void testAddOrderedNote() throws Exception {
         addOrderedNote();
         Collections.sort(notes, new SortById());
-        assertEquals(((PaperNote) notes.get(14)).getTitle(), paperNote14.getTitle());
+        assertEquals(((PaperNote) notes.get(0)).getTitle(), paperNote14.getTitle());
     }
 
     public void testRemoveNote() throws Exception {
