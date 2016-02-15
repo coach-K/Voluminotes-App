@@ -3,8 +3,88 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_write_note">WriteNoteActivity</string>
 
     <string name="action_settings">Settings</string>
 
     <string name="close">Close</string>
+    <string name="autosave">autosave</string>
+    <string name="heart_font">fonts/always_in_my_heart.ttf</string>
+    <string name="roboto_font">fonts/roboto.ttf</string>
+    <string name="canceled">Note was canceled</string>
+
+    <string name="plans">To-Do</string>
+    <string name="voice_notes">Voice Notes</string>
+    <string name="drawings">Paint</string>
+    <string name="more">More</string>
+    <string name="trash">Trash</string>
+    <string name="all_notes">All Notes</string>
+    <string name="note">Note</string>
+
+    <string name="grid">Grid</string>
+
+    <string name="fontfamily">Font Family</string>
+    <string name="heart">Heart</string>
+    <string name="roboto">Roboto</string>
+
+    <string name="fontsize">Text Size</string>
+    <string name="smallFont">Small</string>
+    <string name="mediumFont">Medium</string>
+    <string name="largeFont">Large</string>
+    <string name="extraLargeFont">XLarge</string>
+
+    <string name="color">Color</string>
+    <string name="white">White</string>
+    <string name="blue">Blue</string>
+    <string name="yellow">Yellow</string>
+    <string name="pink">Pink</string>
+    <string name="green">Green</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="draw">Drawing Book</string>
+    <string name="record">Voice Note</string>
+    <string name="todo">Plan your day</string>
+    <string name="write">Take a note</string>
+
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="saved">Note saved successfully.</string>
+    <string name="update">Note updated successfully.</string>
+    <string name="restore_message">Do you want to restore this note?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="search">Search</string>
+    <string name="dashboard">Dashboard</string>
+
+    <string-array name="fonts_array">
+        <item>My Heart</item>
+        <item>Silent Reaction</item>
+        <item>Roboto</item>
+    </string-array>
+
+    <string-array name="size_array">
+        <item>10</item>
+        <item>12</item>
+        <item>14</item>
+        <item>18</item>
+        <item>23</item>
+        <item>26</item>
+        <item>32</item>
+    </string-array>
+
+    <string-array name="time_array_value">
+        <item>0</item>
+        <item>5000</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+    </string-array>
+
+    <string-array name="time_array_field">
+        <item>Disable</item>
+        <item>Every 5 seconds</item>
+        <item>Every 15 seconds</item>
+        <item>Every 30 seconds</item>
+        <item>Every minute</item>
+    </string-array>
 </resources>

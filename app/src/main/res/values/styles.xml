@@ -23,5 +23,19 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="write_style" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/write_back</item>
+    </style>
+
+    <style name="alert_dialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/note_dialog_press</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
 
 </resources>
