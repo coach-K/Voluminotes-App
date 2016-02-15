@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@mipmap/font"
+        android:title="@string/fontfamily"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group>
+                <item android:id="@+id/roboto" android:title="@string/roboto" />
+                <item android:id="@+id/heart" android:title="@string/heart" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:icon="@mipmap/ic_size"
+        android:title="@string/fontsize"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group>
+                <item android:id="@+id/small" android:title="@string/smallFont" />
+                <item android:id="@+id/medium" android:title="@string/mediumFont" />
+                <item android:id="@+id/large" android:title="@string/largeFont" />
+                <item android:id="@+id/extraLarge" android:title="@string/extraLargeFont" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:icon="@mipmap/color_palette"
+        android:title="@string/color"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group>
+                <item android:id="@+id/white" android:title="@string/white" />
+                <item android:id="@+id/blue" android:title="@string/blue" />
+                <item android:id="@+id/yellow" android:title="@string/yellow" />
+                <item android:id="@+id/pink" android:title="@string/pink" />
+                <item android:id="@+id/green" android:title="@string/green" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/share"
+        android:icon="@mipmap/share"
+        android:title="Share"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/delete"
+        android:icon="@mipmap/trash"
+        android:title="Delete"
+        app:showAsAction="ifRoom" />
+</menu>
