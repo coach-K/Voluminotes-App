@@ -4,6 +4,9 @@ package com.andela.notelib.note;
 import android.content.Context;
 
 import com.andela.notelib.util.Settings;
+import com.andela.notelib.util.SortById;
+
+import java.util.Collections;
 
 public class NoteManager {
     public static final int NOTES = 0;
@@ -18,8 +21,12 @@ public class NoteManager {
 
     public NoteManager(Context context, String tableName) throws Exception {
         this.noteDBWriter = new NoteDBWriter<>(tableName);
-        this.notes.addAllOrderedNote(this.noteDBWriter.selectAllNote(NOTES));
-        this.trashNotes.addAllOrderedNote(this.noteDBWriter.selectAllNote(TRASH));
+
+        this.notes = this.noteDBWriter.selectAllNote(NOTES);
+        Collections.sort(this.notes, new SortById());
+
+        this.trashNotes = this.noteDBWriter.selectAllNote(TRASH);
+        Collections.sort(this.trashNotes, new SortById());
 
         this.COUNT += tableName;
         this.context = context;
@@ -32,7 +39,6 @@ public class NoteManager {
         this.notes.addOrderedNote(note);
         this.noteDBWriter.insertNote(note);
         counter++;
-        saveCounter(counter);
     }
 
     public void updateNote(Note note) {
@@ -79,6 +85,10 @@ public class NoteManager {
         this.trashNotes.clear();
         this.noteDBWriter.deleteAlNote(NOTES);
         this.noteDBWriter.deleteAlNote(TRASH);
+    }
+
+    public void saveChanges(){
+        saveCounter(counter);
     }
 
     public NoteList<Note> getAllNotes() {
