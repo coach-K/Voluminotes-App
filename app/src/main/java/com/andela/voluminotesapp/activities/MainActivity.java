@@ -29,6 +29,7 @@ import com.andela.voluminotesapp.R;
 import com.andela.voluminotesapp.callbacks.FragmentRecyclerListener;
 import com.andela.voluminotesapp.callbacks.OnIntersectListener;
 import com.andela.voluminotesapp.callbacks.WelcomeListener;
+import com.andela.voluminotesapp.fragments.MasterFragment;
 import com.andela.voluminotesapp.fragments.NoteGridFragment;
 import com.andela.voluminotesapp.fragments.NoteListFragment;
 import com.andela.voluminotesapp.fragments.SearchFragment;
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity
         FragmentRecyclerListener, WelcomeListener {
     public static final String POSITION = "position";
     public static final String TYPE = "type";
-    public static final String ALL_NOTE_MODE = "allNoteMode";
 
     private Context context = MainActivity.this;
     private LinearLayout deleteArea;
@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity
     private SearchFragment searchFragment;
     private WelcomeFragment welcomeFragment;
     private Toolbar toolbar;
-    private String mode = ALL_NOTE_MODE;
-    private boolean toggle = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +68,7 @@ public class MainActivity extends AppCompatActivity
 
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 MainActivity.this.onClick(Folders.STATIC_PAPER_NOTE);
             }
         });
@@ -88,22 +86,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initializeFragments() {
-        if (noteListFragment == null && noteGridFragment == null
-                && trashNoteListFragment == null && searchFragment == null) {
-            noteListFragment = new NoteListFragment();
-            noteListFragment.setFragmentRecyclerListener(this);
-            noteGridFragment = new NoteGridFragment();
-            noteGridFragment.setFragmentRecyclerListener(this);
-            trashNoteListFragment = new TrashNoteListFragment();
-            trashNoteListFragment.setFragmentRecyclerListener(this);
-            searchFragment = new SearchFragment();
-            searchFragment.setFragmentRecyclerListener(this);
-            welcomeFragment = new WelcomeFragment();
-            welcomeFragment.setWelcomeListener(this);
+        noteListFragment = new NoteListFragment();
+        noteGridFragment = new NoteGridFragment();
+        trashNoteListFragment = new TrashNoteListFragment();
+        searchFragment = new SearchFragment();
 
-            mode = "";
-            replaceFragment(welcomeFragment);
-        }
+        welcomeFragment = new WelcomeFragment();
+        welcomeFragment.setWelcomeListener(this);
+
+        if (MyApplication.getNoteManager(context).getNotesSize() == 0)
+            launchWelcomeFragment(welcomeFragment);
+        else
+            replaceFragment(noteGridFragment);
     }
 
     private void manageToolbar() {
@@ -138,13 +132,14 @@ public class MainActivity extends AppCompatActivity
         this.alertDialog.show();
     }
 
-    private void addFragment(Fragment fragment) {
+    private void launchWelcomeFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, fragment)
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(MasterFragment fragment) {
+        fragment.setFragmentRecyclerListener(this);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
@@ -160,9 +155,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.note_list_menu, menu);
         MenuItem menuItem = menu.findItem(R.id.searchView);
 
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
@@ -183,40 +177,29 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                mode = ALL_NOTE_MODE;
                 replaceFragment(noteGridFragment);
                 return false;
             }
         });
 
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.toggleRecycler) {
-            if (mode.equals(ALL_NOTE_MODE))
-                toggleLayout(item);
-        } else if (id == R.id.searchView) {
-            mode = "";
-            replaceFragment(searchFragment);
+        switch (item.getItemId()) {
+            case R.id.list_icon:
+                replaceFragment(noteListFragment);
+                break;
+            case R.id.grid_icon:
+                replaceFragment(noteGridFragment);
+                break;
+            case R.id.searchView:
+                replaceFragment(searchFragment);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void toggleLayout(MenuItem item) {
-        if (toggle) {
-            replaceFragment(noteGridFragment);
-            item.setIcon(R.mipmap.list);
-        } else {
-            replaceFragment(noteListFragment);
-            item.setIcon(R.mipmap.grid);
-        }
-        toggle = !toggle;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -224,21 +207,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.dashboard:
-                mode = "";
-                replaceFragment(welcomeFragment);
+                launchWelcomeFragment(welcomeFragment);
                 break;
             case R.id.nav_allNotes:
-                mode = ALL_NOTE_MODE;
                 replaceFragment(noteGridFragment);
-                break;
-            case R.id.nav_todo:
-                break;
-            case R.id.nav_voice:
-                break;
-            case R.id.nav_drawings:
-                break;
             case R.id.nav_trash:
-                mode = "";
                 replaceFragment(trashNoteListFragment);
                 break;
             case R.id.nav_settings:
@@ -270,8 +243,6 @@ public class MainActivity extends AppCompatActivity
             case NoteManager.NOTES:
                 showDelete();
                 break;
-            case NoteManager.TRASH:
-                break;
             default:
                 break;
         }
@@ -281,7 +252,7 @@ public class MainActivity extends AppCompatActivity
     public void onNoteClick(int type, int position) {
         switch (type) {
             case NoteManager.NOTES:
-                bundleNote(position);
+                bundleNote(POSITION, position, WriteNoteActivity.class);
                 break;
             case NoteManager.TRASH:
                 trashNoteDialog(position);
@@ -309,10 +280,10 @@ public class MainActivity extends AppCompatActivity
         hideDelete();
     }
 
-    private void bundleNote(int position) {
+    private void bundleNote(String key, int value, Class<?> activity) {
         Bundle bundle = new Bundle();
-        bundle.putInt(POSITION, position);
-        Launcher.launchActivity(context, bundle, WriteNoteActivity.class);
+        bundle.putInt(key, value);
+        Launcher.launchActivity(context, bundle, activity);
     }
 
     private void showDelete() {
@@ -328,8 +299,19 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(TYPE, position);
-        Launcher.launchActivity(context, bundle, WriteNoteActivity.class);
+        switch (position) {
+            case 0:
+                bundleNote(TYPE, position, WriteNoteActivity.class);
+                break;
+            case 1:
+                replaceFragment(noteGridFragment);
+                break;
+            case 2:
+                replaceFragment(trashNoteListFragment);
+                break;
+            case 3:
+                Launcher.launch(context, SettingsActivity.class);
+                break;
+        }
     }
 }
