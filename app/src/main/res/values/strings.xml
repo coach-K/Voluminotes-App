@@ -55,6 +55,7 @@
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="dashboard">Dashboard</string>
+    <string name="list">List</string>
 
     <string-array name="fonts_array">
         <item>My Heart</item>
