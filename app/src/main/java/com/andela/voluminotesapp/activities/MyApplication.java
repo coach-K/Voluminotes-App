@@ -17,7 +17,7 @@ public class MyApplication extends Application {
     public static NoteManager getNoteManager(Context context) {
         if (noteManager == null) {
             try {
-                noteManager = new NoteManager(context, "mightyactivity");
+                noteManager = new NoteManager(context, "lilactivity");
             } catch (Exception e) {
                 e.printStackTrace();
             }
