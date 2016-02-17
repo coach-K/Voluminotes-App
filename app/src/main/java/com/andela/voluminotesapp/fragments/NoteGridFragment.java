@@ -2,6 +2,8 @@ package com.andela.voluminotesapp.fragments;
 
 
 import android.support.v7.widget.GridLayoutManager;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.andela.notelib.note.NoteManager;
 import com.andela.voluminotesapp.R;
@@ -19,5 +21,11 @@ public class NoteGridFragment extends MasterFragment {
                 NoteManager.NOTES);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.note_grid_menu, menu);
     }
 }

@@ -15,7 +15,6 @@ import com.andela.voluminotesapp.adapters.NotesRecyclerAdapter;
 public class TrashNoteListFragment extends MasterFragment {
     @Override
     public void onFragmentViewCreated() {
-        setHasOptionsMenu(true);
         notesRecyclerAdapter = new NotesRecyclerAdapter(
                 getContext(),
                 MyApplication.getNoteManager(getContext()).getAllTrashNotes(),
