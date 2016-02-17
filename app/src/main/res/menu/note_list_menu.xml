@@ -9,9 +9,9 @@
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 
     <item
-        android:id="@+id/toggleRecycler"
+        android:id="@+id/grid_icon"
         android:title="@string/grid"
-        android:icon="@mipmap/list"
+        android:icon="@mipmap/grid"
         app:showAsAction="ifRoom" />
 
 </menu>
