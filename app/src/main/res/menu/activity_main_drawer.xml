@@ -10,22 +10,6 @@
             android:id="@+id/nav_allNotes"
             android:icon="@mipmap/book"
             android:title="@string/all_notes" />
-        <item
-            android:id="@+id/nav_journal"
-            android:icon="@mipmap/note_dark"
-            android:title="@string/note" />
-        <item
-            android:id="@+id/nav_todo"
-            android:icon="@mipmap/todo"
-            android:title="@string/plans" />
-        <item
-            android:id="@+id/nav_voice"
-            android:icon="@mipmap/mic_dark"
-            android:title="@string/voice_notes" />
-        <item
-            android:id="@+id/nav_drawings"
-            android:icon="@mipmap/paint"
-            android:title="@string/drawings" />
     </group>
 
     <item android:title="@string/more">
