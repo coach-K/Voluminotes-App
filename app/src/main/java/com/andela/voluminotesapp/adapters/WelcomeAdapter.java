@@ -56,9 +56,9 @@ public class WelcomeAdapter extends RecyclerView.Adapter<WelcomeItem> {
     private void populateItem() {
         mItems = new ArrayList<>();
         mItems.add(new Welcome(0, R.mipmap.pencil, R.color.note_green, context.getString(R.string.write)));
-        mItems.add(new Welcome(1, R.mipmap.todo, R.color.note_yellow, context.getString(R.string.todo)));
-        mItems.add(new Welcome(2, R.mipmap.mic, R.color.note_blue, context.getString(R.string.record)));
-        mItems.add(new Welcome(3, R.mipmap.paint_white, R.color.note_pink, context.getString(R.string.draw)));
+        mItems.add(new Welcome(1, R.mipmap.book, R.color.note_yellow, context.getString(R.string.all_notes)));
+        mItems.add(new Welcome(2, R.mipmap.trash, R.color.note_blue, context.getString(R.string.trash)));
+        mItems.add(new Welcome(3, R.mipmap.ic_settings, R.color.note_pink, context.getString(R.string.action_settings)));
     }
 
     public void setOnWelcomeListener(WelcomeListener welcomeListener){
