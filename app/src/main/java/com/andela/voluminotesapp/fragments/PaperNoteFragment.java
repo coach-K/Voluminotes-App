@@ -32,7 +32,6 @@ import com.andela.voluminotesapp.utilities.ShareNote;
 
 
 public class PaperNoteFragment extends AutoSaveFragment {
-
     private EditText noteTitle;
     private EditText noteArea;
     private RelativeLayout noteColor;
@@ -63,8 +62,6 @@ public class PaperNoteFragment extends AutoSaveFragment {
         noteTitle = (EditText) view.findViewById(R.id.noteTitle);
         noteArea = (EditText) view.findViewById(R.id.noteArea);
         noteColor = (RelativeLayout) view.findViewById(R.id.noteColor);
-
-        //noteArea.setHeight(size.y - size.x);
 
         this.paperNote = new PaperNote();
 
