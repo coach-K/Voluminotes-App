@@ -11,10 +11,7 @@ import com.andela.notelib.note.Folders;
 import com.andela.notelib.note.Note;
 import com.andela.notelib.note.NoteList;
 import com.andela.voluminotesapp.activities.MyApplication;
-import com.andela.voluminotesapp.fragments.AudioNoteFragment;
-import com.andela.voluminotesapp.fragments.DrawNoteFragment;
 import com.andela.voluminotesapp.fragments.PaperNoteFragment;
-import com.andela.voluminotesapp.fragments.TodoNoteFragment;
 
 
 public class OpenExistingAdapter extends FragmentPagerAdapter {
@@ -41,12 +38,6 @@ public class OpenExistingAdapter extends FragmentPagerAdapter {
         switch (note.getFolderId()) {
             case Folders.STATIC_PAPER_NOTE:
                 return bundleFragment(note, new PaperNoteFragment());
-            case Folders.STATIC_TODO_NOTE:
-                return bundleFragment(note, new TodoNoteFragment());
-            case Folders.STATIC_AUDIO_NOTE:
-                return bundleFragment(note, new AudioNoteFragment());
-            case Folders.STATIC_DRAW_NOTE:
-                return bundleFragment(note, new DrawNoteFragment());
             default:
                 return null;
         }
