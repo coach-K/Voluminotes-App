@@ -5,16 +5,17 @@ public enum Constants {
     SMALL(20),
     MEDIUM(30),
     LARGE(40),
-    EXTRA_LARGE(50);
+    EXTRA_LARGE(50),
+    VOLUMINOTES_TABLE("voluminotestable");
 
     private String constant;
     private int sizes;
 
-    Constants(String constant){
+    Constants(String constant) {
         this.constant = constant;
     }
 
-    Constants(int sizes){
+    Constants(int sizes) {
         this.sizes = sizes;
     }
 
