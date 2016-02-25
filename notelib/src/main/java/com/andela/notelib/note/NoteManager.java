@@ -33,17 +33,16 @@ public class NoteManager {
         counter = getCounter();
     }
 
-    public void saveNote(Note note) {
+    public Note saveNote(Note note) {
         note.setId(counter);
         note.setTrash(NOTES);
         this.notes.addOrderedNote(note);
-        this.noteDBWriter.insertNote(note);
         counter++;
+        return note;
     }
 
     public void updateNote(Note note) {
         this.notes.updateNote(note);
-        this.noteDBWriter.updateNote(note);
     }
 
     public boolean containsNote(Note note) {
@@ -54,14 +53,12 @@ public class NoteManager {
         this.notes.removeNote(note);
         note.setTrash(TRASH);
         this.trashNotes.addOrderedNote(note);
-        this.noteDBWriter.updateNote(note);
     }
 
     public void restoreNoteFromTrash(Note note) {
         this.trashNotes.removeNote(note);
         note.setTrash(NOTES);
         this.notes.addOrderedNote(note);
-        this.noteDBWriter.updateNote(note);
     }
 
     public void deleteFromTrash(Note note) {
@@ -87,8 +84,26 @@ public class NoteManager {
         this.noteDBWriter.deleteAlNote(TRASH);
     }
 
-    public void saveChanges(){
+    public int getNotePosition(Note note) {
+        return this.notes.indexOf(note);
+    }
+
+    public void saveChanges() {
         saveCounter(counter);
+        makeChangesToDatabase(this.notes);
+        makeChangesToDatabase(this.trashNotes);
+    }
+
+    private void makeChangesToDatabase(NoteList<Note> noteList) {
+        if (noteList.size() > 0) {
+            for (Note note : noteList) {
+                if (this.noteDBWriter.selectById(note.getId()) == null) {
+                    this.noteDBWriter.insertNote(note);
+                } else {
+                    this.noteDBWriter.updateNote(note);
+                }
+            }
+        }
     }
 
     public NoteList<Note> getAllNotes() {
@@ -101,6 +116,10 @@ public class NoteManager {
 
     public Note getNote(Note note) {
         return this.notes.getNote(note.getId());
+    }
+
+    public Note getNoteById(int id) {
+        return this.notes.getNote(id);
     }
 
     public Note getTrashNote(Note note) {
