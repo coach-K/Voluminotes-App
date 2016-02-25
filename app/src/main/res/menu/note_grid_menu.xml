@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/searchView"
-        android:title="@string/search"
         android:icon="@mipmap/search"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView"/>
+        android:title="@string/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
 
     <item
         android:id="@+id/list_icon"
-        android:title="@string/list"
         android:icon="@mipmap/list"
+        android:title="@string/list"
         app:showAsAction="ifRoom" />
 
 </menu>

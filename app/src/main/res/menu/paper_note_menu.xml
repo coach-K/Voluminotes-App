@@ -7,8 +7,12 @@
         app:showAsAction="ifRoom">
         <menu>
             <group>
-                <item android:id="@+id/roboto" android:title="@string/roboto" />
-                <item android:id="@+id/heart" android:title="@string/heart" />
+                <item
+                    android:id="@+id/roboto"
+                    android:title="@string/roboto" />
+                <item
+                    android:id="@+id/heart"
+                    android:title="@string/heart" />
             </group>
         </menu>
     </item>
@@ -18,10 +22,18 @@
         app:showAsAction="ifRoom">
         <menu>
             <group>
-                <item android:id="@+id/small" android:title="@string/smallFont" />
-                <item android:id="@+id/medium" android:title="@string/mediumFont" />
-                <item android:id="@+id/large" android:title="@string/largeFont" />
-                <item android:id="@+id/extraLarge" android:title="@string/extraLargeFont" />
+                <item
+                    android:id="@+id/small"
+                    android:title="@string/smallFont" />
+                <item
+                    android:id="@+id/medium"
+                    android:title="@string/mediumFont" />
+                <item
+                    android:id="@+id/large"
+                    android:title="@string/largeFont" />
+                <item
+                    android:id="@+id/extraLarge"
+                    android:title="@string/extraLargeFont" />
             </group>
         </menu>
     </item>
@@ -31,22 +43,27 @@
         app:showAsAction="ifRoom">
         <menu>
             <group>
-                <item android:id="@+id/white" android:title="@string/white" />
-                <item android:id="@+id/blue" android:title="@string/blue" />
-                <item android:id="@+id/yellow" android:title="@string/yellow" />
-                <item android:id="@+id/pink" android:title="@string/pink" />
-                <item android:id="@+id/green" android:title="@string/green" />
+                <item
+                    android:id="@+id/white"
+                    android:title="@string/white" />
+                <item
+                    android:id="@+id/blue"
+                    android:title="@string/blue" />
+                <item
+                    android:id="@+id/yellow"
+                    android:title="@string/yellow" />
+                <item
+                    android:id="@+id/pink"
+                    android:title="@string/pink" />
+                <item
+                    android:id="@+id/green"
+                    android:title="@string/green" />
             </group>
         </menu>
     </item>
     <item
         android:id="@+id/share"
         android:icon="@mipmap/share"
-        android:title="Share"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/delete"
-        android:icon="@mipmap/trash"
-        android:title="Delete"
+        android:title="@string/share"
         app:showAsAction="ifRoom" />
 </menu>

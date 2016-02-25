@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/searchView"
-        android:title="@string/search"
         android:icon="@mipmap/search"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView"/>
+        android:title="@string/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
 
     <item
         android:id="@+id/grid_icon"
-        android:title="@string/grid"
         android:icon="@mipmap/grid"
+        android:title="@string/grid"
         app:showAsAction="ifRoom" />
 
 </menu>
