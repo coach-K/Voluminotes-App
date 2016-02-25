@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/welcomeCard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/note_green"
-    android:id="@+id/welcomeCard"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="10dp"
     android:layout_margin="3dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/note_green"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
 
     <TextView
         android:id="@+id/textView"
-        android:drawableTop="@mipmap/pencil"
-        android:text="hello wol"
-        android:padding="20dp"
-        android:gravity="center"
-        android:textColor="@color/icons"
-        android:drawableTint="@color/icons"
-        android:drawablePadding="20sp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:drawablePadding="20sp"
+        android:drawableTint="@color/icons"
+        android:drawableTop="@mipmap/pencil"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="hello wol"
+        android:textColor="@color/icons" />
 
 </android.support.v7.widget.CardView>

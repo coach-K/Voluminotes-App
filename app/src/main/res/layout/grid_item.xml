@@ -4,8 +4,8 @@
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
     android:layout_margin="5dp"
+    android:clickable="true"
     app:cardBackgroundColor="@color/note_blue"
     app:cardCornerRadius="15dp"
     app:cardElevation="8dp">
@@ -13,6 +13,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="15dp"
+        android:contentDescription="@string/all_notes"
         android:src="@drawable/topper" />
 
     <RelativeLayout
@@ -24,23 +25,25 @@
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="center_vertical"
-            android:gravity="right"
             android:layout_marginBottom="2dp"
             android:layout_marginTop="10dp"
-            android:layout_alignParentBottom="true"
-            android:textStyle="italic"
-            android:text="Jan 23, 2016" />
+            android:gravity="right"
+            android:text="Jan 23, 2016"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical"
             android:layout_marginBottom="25dp"
             android:layout_marginTop="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:maxLines="8"
             android:text="The new Title \n is the way that \n your eyes \n hello there \n" />
 
     </RelativeLayout>

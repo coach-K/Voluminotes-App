@@ -3,7 +3,7 @@
     android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/note_white"
     android:divider="@color/divider"
     android:dividerHeight="1dp"
-    android:soundEffectsEnabled="true"
-    android:background="@color/note_white" />
+    android:soundEffectsEnabled="true" />

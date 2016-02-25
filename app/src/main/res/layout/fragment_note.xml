@@ -2,59 +2,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/small_top"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/small_top"
-    android:paddingBottom="@dimen/small_top"
-    android:orientation="vertical">
+    android:paddingTop="@dimen/small_top">
 
     <RelativeLayout
         android:id="@+id/noteColor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/note_white" >
+        android:background="@drawable/note_white">
 
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="30dp">
+
+            <EditText
+                android:id="@+id/noteTitle"
+                style="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:hint="@string/title"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textIsSelectable="true" />
+
+            <EditText
+                android:id="@+id/noteArea"
+                style="@style/Base.TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="30dp"
-                android:clickable="false" >
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="?listPreferredItemHeightSmall"
+                android:background="#00ffffff"
+                android:ems="10"
+                android:enabled="true"
+                android:gravity="top"
+                android:hint="@string/message"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:textIsSelectable="true" />
 
-                <EditText
-                    android:id="@+id/noteTitle"
-                    style="@style/Base.TextAppearance.AppCompat.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="?listPreferredItemHeight"
-                    android:hint="@string/title"
-                    android:inputType="text"
-                    android:enabled="true"
-                    android:textIsSelectable="true" />
-
-                <EditText
-                    android:id="@+id/noteArea"
-                    android:layout_marginTop="?listPreferredItemHeight"
-                    style="@style/Base.TextAppearance.AppCompat.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/message"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true"
-                    android:background="#00ffffff"
-                    android:ems="10"
-                    android:enabled="true"
-                    android:gravity="top"
-                    android:inputType="textMultiLine"
-                    android:textIsSelectable="true" />
-
-            </RelativeLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="30dp"
