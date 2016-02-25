@@ -51,11 +51,17 @@
     <string name="saved">Note saved successfully.</string>
     <string name="update">Note updated successfully.</string>
     <string name="restore_message">Do you want to restore this note?</string>
+    <string name="empty_message">Do you want to empty the trash?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="dashboard">Dashboard</string>
     <string name="list">List</string>
+    <string name="notdisplay">Press the icon below to take a Note.</string>
+    <string name="trashempty">Trash is currently empty</string>
+    <string name="trash_empty">Trash is empty</string>
+    <string name="mime_html">text/html</string>
+    <string name="share">Share</string>
 
     <string-array name="fonts_array">
         <item>My Heart</item>
@@ -75,10 +81,10 @@
 
     <string-array name="time_array_value">
         <item>0</item>
-        <item>5000</item>
-        <item>15000</item>
-        <item>30000</item>
-        <item>60000</item>
+        <item>10000</item>
+        <item>20000</item>
+        <item>35000</item>
+        <item>65000</item>
     </string-array>
 
     <string-array name="time_array_field">
