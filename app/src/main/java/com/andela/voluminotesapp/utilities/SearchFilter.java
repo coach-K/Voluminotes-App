@@ -23,32 +23,28 @@ public class SearchFilter extends Filter {
 
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
-        NoteList<Note> resultNote = new NoteList<>();
         FilterResults filterResults = new FilterResults();
+        this.notesRecyclerAdapter.getNotes().clear();
 
         String query = constraint.toString().trim().toLowerCase();
-        if (!query.isEmpty()){
-            for (Note note : this.notes){
+        if (!query.isEmpty()) {
+            for (Note note : this.notes) {
                 if (note instanceof PaperNote) {
                     PaperNote paperNote = (PaperNote) note;
                     if (paperNote.getTitle().trim().toLowerCase().contains(query)
                             || paperNote.getNote().trim().toLowerCase().contains(query)) {
-                        resultNote.addNote(paperNote);
+                        this.notesRecyclerAdapter.getNotes().addNote(paperNote);
                     }
                 }
             }
         } else
-            resultNote.clear();
+            this.notesRecyclerAdapter.getNotes().clear();
 
-
-        filterResults.values = resultNote;
-        filterResults.count = resultNote.size();
         return filterResults;
     }
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        this.notesRecyclerAdapter.setNoteList((NoteList<Note>) results.values);
         this.notesRecyclerAdapter.notifyDataSetChanged();
     }
 }

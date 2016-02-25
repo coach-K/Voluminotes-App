@@ -23,7 +23,6 @@ public class ApplicationExit extends Service {
 
     @Override
     public void onDestroy() {
-        MyApplication.getNoteManager(getBaseContext()).saveChanges();
         super.onDestroy();
     }
 

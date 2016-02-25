@@ -16,7 +16,7 @@ public class Collision {
         region2 = getRegion(layout2);
     }
 
-    public void intersect(OnIntersectListener listener){
+    public void intersect(OnIntersectListener listener) {
         if (region1.op(region2, Region.Op.INTERSECT)) {
             listener.onIntersect();
         }

@@ -3,9 +3,9 @@ package com.andela.voluminotesapp.utilities;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.content.ContextCompat;
 
 import com.andela.notelib.note.PaperNote;
+import com.andela.voluminotesapp.R;
 
 /**
  * Created by andela on 2/14/16.
@@ -17,11 +17,11 @@ public class ShareNote {
     public ShareNote() {
     }
 
-    public void sharePaperNote(Activity activity, PaperNote note){
+    public void sharePaperNote(Activity activity, PaperNote note) {
         this.activity = activity;
         shareIntent = ShareCompat.IntentBuilder
                 .from(this.activity)
-                .setType("text/html")
+                .setType(activity.getString(R.string.mime_html))
                 .addEmailTo("")
                 .setSubject(note.getTitle())
                 .setHtmlText(note.getNote())
@@ -30,8 +30,8 @@ public class ShareNote {
         sendNote();
     }
 
-    private void sendNote(){
-        if (shareIntent.resolveActivity(this.activity.getPackageManager()) != null){
+    private void sendNote() {
+        if (shareIntent.resolveActivity(this.activity.getPackageManager()) != null) {
             this.activity.startActivity(shareIntent);
         }
     }
