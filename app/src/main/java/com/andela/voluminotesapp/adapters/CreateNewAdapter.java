@@ -11,6 +11,7 @@ import com.andela.voluminotesapp.fragments.PaperNoteFragment;
 
 public class CreateNewAdapter extends FragmentPagerAdapter {
     private int type;
+
     public CreateNewAdapter(FragmentManager fm, int type) {
         super(fm);
         this.type = type;

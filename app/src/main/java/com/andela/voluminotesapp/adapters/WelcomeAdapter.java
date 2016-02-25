@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.andela.voluminotesapp.R;
+import com.andela.voluminotesapp.activities.MyApplication;
 import com.andela.voluminotesapp.adapters.views.WelcomeItem;
 import com.andela.voluminotesapp.callbacks.WelcomeListener;
-import com.andela.voluminotesapp.utilities.Welcome;
+import com.andela.voluminotesapp.utilities.Pages;
+import com.andela.voluminotesapp.model.Welcome;
 
 import java.util.ArrayList;
 
@@ -29,7 +31,8 @@ public class WelcomeAdapter extends RecyclerView.Adapter<WelcomeItem> {
 
     @Override
     public WelcomeItem onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.welcome_item, parent, false);
+        View view = LayoutInflater.from(
+                parent.getContext()).inflate(R.layout.welcome_item, parent, false);
         return new WelcomeItem(view);
     }
 
@@ -38,14 +41,16 @@ public class WelcomeAdapter extends RecyclerView.Adapter<WelcomeItem> {
         Welcome welcome = mItems.get(position);
 
         holder.textView.setText(welcome.getTitle());
-        holder.textView.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(context, welcome.getDrawable()), null, null);
+        holder.textView.setCompoundDrawablesWithIntrinsicBounds(null,
+                ContextCompat.getDrawable(context, welcome.getDrawable()), null, null);
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 welcomeListener.onClick(position);
             }
         });
-        holder.welcomeCard.setCardBackgroundColor(ContextCompat.getColor(context, welcome.getColor()));
+        holder.welcomeCard.setCardBackgroundColor(
+                ContextCompat.getColor(context, welcome.getColor()));
     }
 
     @Override
@@ -55,13 +60,22 @@ public class WelcomeAdapter extends RecyclerView.Adapter<WelcomeItem> {
 
     private void populateItem() {
         mItems = new ArrayList<>();
-        mItems.add(new Welcome(0, R.mipmap.pencil, R.color.note_green, context.getString(R.string.write)));
-        mItems.add(new Welcome(1, R.mipmap.book, R.color.note_yellow, context.getString(R.string.all_notes)));
-        mItems.add(new Welcome(2, R.mipmap.trash, R.color.note_blue, context.getString(R.string.trash)));
-        mItems.add(new Welcome(3, R.mipmap.ic_settings, R.color.note_pink, context.getString(R.string.action_settings)));
+        mItems.add(new Welcome(Pages.TAKE_A_NOTE, R.mipmap.pencil, R.color.note_green,
+                context.getString(R.string.write)));
+
+        mItems.add(new Welcome(Pages.VIEW_ALL_NOTES, R.mipmap.book, R.color.note_yellow,
+                String.format("%s (%s)", context.getString(R.string.all_notes),
+                        MyApplication.getNoteManager(context).getNotesSize())));
+
+        mItems.add(new Welcome(Pages.VIEW_TRASH, R.mipmap.trash, R.color.note_blue,
+                String.format("%s (%s)", context.getString(R.string.trash),
+                        MyApplication.getNoteManager(context).getTrashNotesSize())));
+
+        mItems.add(new Welcome(Pages.VIEW_SETTINGS, R.mipmap.ic_settings, R.color.note_pink,
+                context.getString(R.string.action_settings)));
     }
 
-    public void setOnWelcomeListener(WelcomeListener welcomeListener){
+    public void setOnWelcomeListener(WelcomeListener welcomeListener) {
         this.welcomeListener = welcomeListener;
     }
 }
