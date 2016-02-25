@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/ColorPrimaryLight" android:state_pressed="true" />
-    <item android:drawable="@color/cardview_light_background" />
+    <item android:drawable="@color/note_green" android:state_pressed="true" />
+    <item android:drawable="@color/note_white" />
 </selector>
