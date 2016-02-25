@@ -27,6 +27,18 @@ public class WriteNoteActivity extends AppCompatActivity {
 
         manageToolbar();
 
+        initializeComponents();
+    }
+
+    private void manageToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Typeface alwaysInMyHeart = Typeface.createFromAsset(getAssets(), getString(R.string.heart_font));
+        TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setTypeface(alwaysInMyHeart);
+        setSupportActionBar(toolbar);
+    }
+
+    private void initializeComponents() {
         viewPager = (ViewPager) findViewById(R.id.noteViewPager);
 
         Intent intent = getIntent();
@@ -40,14 +52,6 @@ public class WriteNoteActivity extends AppCompatActivity {
         } else if (type != Integer.MAX_VALUE) {
             createNewNote(type);
         }
-    }
-
-    private void manageToolbar(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        Typeface alwaysInMyHeart = Typeface.createFromAsset(getAssets(), getString(R.string.heart_font));
-        TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setTypeface(alwaysInMyHeart);
-        setSupportActionBar(toolbar);
     }
 
     private void createNewNote(int type) {

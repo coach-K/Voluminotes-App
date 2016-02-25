@@ -38,12 +38,15 @@ import com.andela.voluminotesapp.fragments.WelcomeFragment;
 import com.andela.voluminotesapp.utilities.Collision;
 import com.andela.voluminotesapp.utilities.Launcher;
 import com.andela.voluminotesapp.utilities.MsgBox;
+import com.andela.voluminotesapp.utilities.Pages;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         FragmentRecyclerListener, WelcomeListener {
     public static final String POSITION = "position";
     public static final String TYPE = "type";
+    public static final String STATE = "state";
+    public static final int VIBRATE = 200;
 
     private Context context = MainActivity.this;
     private LinearLayout deleteArea;
@@ -63,6 +66,27 @@ public class MainActivity extends AppCompatActivity
 
         manageToolbar();
 
+        initializeComponents();
+
+        initializeFragments();
+
+        if (savedInstanceState == null) {
+            initialLaunch();
+        } else {
+            Pages.CURRENT = savedInstanceState.getInt(STATE);
+            continueLaunch();
+        }
+    }
+
+    private void manageToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Typeface alwaysInMyHeart = Typeface.createFromAsset(getAssets(), getString(R.string.heart_font));
+        TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setTypeface(alwaysInMyHeart);
+        setSupportActionBar(toolbar);
+    }
+
+    private void initializeComponents() {
         deleteArea = (LinearLayout) findViewById(R.id.deleteArea);
         hideDelete();
 
@@ -81,46 +105,60 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        initializeFragments();
     }
 
     private void initializeFragments() {
+        trashNoteListFragment = new TrashNoteListFragment();
         noteListFragment = new NoteListFragment();
         noteGridFragment = new NoteGridFragment();
-        trashNoteListFragment = new TrashNoteListFragment();
         searchFragment = new SearchFragment();
-
         welcomeFragment = new WelcomeFragment();
-        welcomeFragment.setWelcomeListener(this);
-
-        if (MyApplication.getNoteManager(context).getNotesSize() == 0)
-            launchWelcomeFragment(welcomeFragment);
-        else
-            replaceFragment(noteGridFragment);
     }
 
-    private void manageToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        Typeface alwaysInMyHeart = Typeface.createFromAsset(getAssets(), getString(R.string.heart_font));
-        TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setTypeface(alwaysInMyHeart);
-        setSupportActionBar(toolbar);
+    private void initialLaunch() {
+        if (MyApplication.getNoteManager(context).getNotesSize() == 0) {
+            Pages.CURRENT = Pages.WELCOME;
+            welcomeFragment.setWelcomeListener(this);
+            addFragment(welcomeFragment);
+        } else {
+            Pages.CURRENT = Pages.ALL_NOTES_GRID;
+            noteGridFragment.setFragmentRecyclerListener(this);
+            addFragment(noteGridFragment);
+        }
     }
 
-    private void trashNoteDialog(final int position) {
+    private void continueLaunch() {
+        switch (Pages.CURRENT) {
+            case Pages.WELCOME:
+                launchWelcomeFragment();
+                break;
+            case Pages.ALL_NOTES_GRID:
+                noteGridFragment.setFragmentRecyclerListener(this);
+                replaceFragment(noteGridFragment);
+                break;
+            case Pages.ALL_NOTES_LIST:
+                noteListFragment.setFragmentRecyclerListener(this);
+                replaceFragment(noteListFragment);
+                break;
+            case Pages.TRASH:
+                trashNoteListFragment.setFragmentRecyclerListener(this);
+                replaceFragment(trashNoteListFragment);
+                break;
+            case Pages.SEARCH:
+                launchSearchFragment();
+                break;
+        }
+    }
+
+    private void trashNoteDialog(String message, View.OnClickListener listener) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.trash_note_dialog, null);
         dialogBuilder.setView(dialogView);
 
-        dialogView.findViewById(R.id.yes).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                trashNoteListFragment.restoreNote(position);
-                alertDialog.dismiss();
-            }
-        });
+        TextView messageView = (TextView) dialogView.findViewById(R.id.message);
+        messageView.setText(message);
+        dialogView.findViewById(R.id.yes).setOnClickListener(listener);
         dialogView.findViewById(R.id.no).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,9 +170,24 @@ public class MainActivity extends AppCompatActivity
         this.alertDialog.show();
     }
 
-    private void launchWelcomeFragment(Fragment fragment) {
+    private void addFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, fragment)
+                .add(R.id.container, fragment)
+                .commit();
+    }
+
+    private void launchWelcomeFragment() {
+        welcomeFragment.setWelcomeListener(this);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, welcomeFragment)
+                .commit();
+        this.invalidateOptionsMenu();
+    }
+
+    private void launchSearchFragment() {
+        searchFragment.setFragmentRecyclerListener(MainActivity.this);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, searchFragment)
                 .commit();
     }
 
@@ -143,6 +196,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+        this.invalidateOptionsMenu();
     }
 
     @Override
@@ -155,12 +209,48 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-   /* @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        switch (Pages.CURRENT) {
+            case Pages.WELCOME:
+                setMenu(R.menu.search_menu, menu);
+                break;
+            case Pages.ALL_NOTES_GRID:
+                setMenu(R.menu.note_grid_menu, menu);
+                break;
+            case Pages.ALL_NOTES_LIST:
+                setMenu(R.menu.note_list_menu, menu);
+                break;
+            case Pages.TRASH:
+                setMenu(R.menu.trash_menu, menu);
+                break;
+        }
+        return true;
+    }
+
+    private void setMenu(int id, Menu menu) {
+        getMenuInflater().inflate(id, menu);
+        setSearch(menu);
+    }
+
+    private void setSearch(Menu menu) {
         MenuItem menuItem = menu.findItem(R.id.searchView);
+        MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                Pages.PREVIOUS = Pages.CURRENT;
+                launchSearchFragment();
+                return true;
+            }
 
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                Pages.CURRENT = Pages.PREVIOUS;
+                continueLaunch();
+                return true;
+            }
+        });
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -174,32 +264,40 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                replaceFragment(noteGridFragment);
-                return false;
-            }
-        });
-
-        return true;
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.list_icon:
-                replaceFragment(noteListFragment);
+                launchScreen(Pages.ALL_NOTES_LIST);
                 break;
             case R.id.grid_icon:
-                replaceFragment(noteGridFragment);
+                launchScreen(Pages.ALL_NOTES_GRID);
                 break;
-            case R.id.searchView:
-                replaceFragment(searchFragment);
+            case R.id.trashItem:
+                if (!(MyApplication.getNoteManager(context).isTrashNotesEmpty())) {
+                    trashNoteDialog(getString(R.string.empty_message), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            trashNoteListFragment.emptyTrash();
+                            alertDialog.dismiss();
+                        }
+                    });
+                } else {
+                    MsgBox.show(context, getString(R.string.trash_empty));
+                }
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void launchScreen(int page) {
+        if (page != Pages.CURRENT) {
+            Pages.CURRENT = page;
+            continueLaunch();
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -207,12 +305,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.dashboard:
-                launchWelcomeFragment(welcomeFragment);
+                launchScreen(Pages.WELCOME);
                 break;
             case R.id.nav_allNotes:
-                replaceFragment(noteGridFragment);
+                launchScreen(Pages.ALL_NOTES_GRID);
+                break;
             case R.id.nav_trash:
-                replaceFragment(trashNoteListFragment);
+                launchScreen(Pages.TRASH);
                 break;
             case R.id.nav_settings:
                 Launcher.launch(context, SettingsActivity.class);
@@ -249,17 +348,31 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNoteClick(int type, int position) {
+    public void onNoteClick(int type, final int position, Note note) {
         switch (type) {
             case NoteManager.NOTES:
-                bundleNote(POSITION, position, WriteNoteActivity.class);
+                bundleNote(POSITION, getNotePosition(note), WriteNoteActivity.class);
                 break;
             case NoteManager.TRASH:
-                trashNoteDialog(position);
+                displayTrashDialog(position);
                 break;
             default:
                 break;
         }
+    }
+
+    private void displayTrashDialog(final int position) {
+        trashNoteDialog(getString(R.string.restore_message), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                trashNoteListFragment.restoreNote(position);
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private int getNotePosition(Note note) {
+        return MyApplication.getNoteManager(context).getNotePosition(note);
     }
 
     @Override
@@ -269,9 +382,9 @@ public class MainActivity extends AppCompatActivity
                 MyApplication.getNoteManager(context).moveNoteToTrash(note);
                 break;
             case NoteManager.TRASH:
-                if (restore)
+                if (restore) {
                     MyApplication.getNoteManager(context).restoreNoteFromTrash(note);
-                else
+                } else
                     MyApplication.getNoteManager(context).deleteFromTrash(note);
                 break;
             default:
@@ -290,7 +403,7 @@ public class MainActivity extends AppCompatActivity
         deleteArea.setVisibility(View.VISIBLE);
         Vibrator vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
         if (vibrator.hasVibrator())
-            vibrator.vibrate(200);
+            vibrator.vibrate(VIBRATE);
     }
 
     private void hideDelete() {
@@ -300,18 +413,32 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(int position) {
         switch (position) {
-            case 0:
+            case Pages.TAKE_A_NOTE:
                 bundleNote(TYPE, position, WriteNoteActivity.class);
                 break;
-            case 1:
-                replaceFragment(noteGridFragment);
+            case Pages.VIEW_ALL_NOTES:
+                Pages.CURRENT = Pages.ALL_NOTES_GRID;
+                continueLaunch();
                 break;
-            case 2:
-                replaceFragment(trashNoteListFragment);
+            case Pages.VIEW_TRASH:
+                Pages.CURRENT = Pages.TRASH;
+                continueLaunch();
                 break;
-            case 3:
+            case Pages.VIEW_SETTINGS:
                 Launcher.launch(context, SettingsActivity.class);
                 break;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(STATE, Pages.CURRENT);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onPause() {
+        MyApplication.getNoteManager(getBaseContext()).saveChanges();
+        super.onPause();
     }
 }
