@@ -2,6 +2,7 @@ package com.andela.voluminotesapp.fragments;
 
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,23 +22,9 @@ public class TrashNoteListFragment extends MasterFragment {
                 R.layout.linear_item,
                 NoteManager.TRASH);
 
+        if (MyApplication.getNoteManager(getContext()).isTrashNotesEmpty())
+            showNoFeed(getActivity().getString(R.string.trashempty), R.mipmap.trash_dark);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.trash_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.trashItem:
-                deleteAllNotes();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

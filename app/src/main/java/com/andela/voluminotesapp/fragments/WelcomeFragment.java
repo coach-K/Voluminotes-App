@@ -17,7 +17,6 @@ import com.andela.voluminotesapp.callbacks.WelcomeListener;
  * Created by andela on 2/15/16.
  */
 public class WelcomeFragment extends Fragment {
-
     private WelcomeListener welcomeListener;
 
     @Nullable
@@ -39,7 +38,7 @@ public class WelcomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void setWelcomeListener(WelcomeListener welcomeListener){
+    public void setWelcomeListener(WelcomeListener welcomeListener) {
         this.welcomeListener = welcomeListener;
     }
 }

@@ -2,8 +2,6 @@ package com.andela.voluminotesapp.fragments;
 
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.andela.notelib.note.NoteManager;
 import com.andela.voluminotesapp.R;
@@ -20,12 +18,9 @@ public class NoteListFragment extends MasterFragment {
                 R.layout.linear_item,
                 NoteManager.NOTES);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-    }
+        if (MyApplication.getNoteManager(getContext()).isNotesEmpty())
+            showNoFeed(getActivity().getString(R.string.notdisplay), R.mipmap.pencil_dark);
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.note_list_menu, menu);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }

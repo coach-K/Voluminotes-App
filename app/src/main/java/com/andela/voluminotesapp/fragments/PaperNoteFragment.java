@@ -2,15 +2,12 @@ package com.andela.voluminotesapp.fragments;
 
 
 import android.content.Context;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,11 +24,12 @@ import com.andela.voluminotesapp.R;
 import com.andela.voluminotesapp.activities.MyApplication;
 import com.andela.voluminotesapp.callbacks.AutoSaveCallback;
 import com.andela.voluminotesapp.config.Constants;
-import com.andela.voluminotesapp.utilities.MsgBox;
 import com.andela.voluminotesapp.utilities.ShareNote;
 
 
 public class PaperNoteFragment extends AutoSaveFragment {
+    public static final String STATE = "state";
+
     private EditText noteTitle;
     private EditText noteArea;
     private RelativeLayout noteColor;
@@ -39,17 +37,14 @@ public class PaperNoteFragment extends AutoSaveFragment {
     private PaperNote paperNote;
     private Bundle bundle;
     private InputMethodManager inputMethodManager;
-    boolean toggle = false;
+    private boolean toggle = false;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null)
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        manageToolbar();
 
         return view;
     }
@@ -59,62 +54,64 @@ public class PaperNoteFragment extends AutoSaveFragment {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
 
-        noteTitle = (EditText) view.findViewById(R.id.noteTitle);
-        noteArea = (EditText) view.findViewById(R.id.noteArea);
-        noteColor = (RelativeLayout) view.findViewById(R.id.noteColor);
+        initializeComponents(view);
 
-        this.paperNote = new PaperNote();
+        getPaperNote(savedInstanceState);
 
-        setFontFamily(getContext().getString(R.string.heart_font));
-        setFontSize(30);
-        setNoteBackground(R.drawable.note_white);
+        setPaperNote();
 
-        inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!toggle) {
-                    inputMethodManager.toggleSoftInput(0, 1);
-                } else {
-                    inputMethodManager.toggleSoftInput(1, 0);
-                }
-                toggle = !toggle;
-            }
-        };
-        noteArea.setOnClickListener(onClickListener);
-        noteTitle.setOnClickListener(onClickListener);
-
-        setNoteForEdit();
-
-        autoSave(new AutoSaveCallback() {
+        setAutoSaveListener(new AutoSaveCallback() {
             @Override
             public void onSave() {
                 save();
             }
 
-            @Override
-            public void onFinish() {
-            }
         });
+        activateAutoSave();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.paper_note_menu, menu);
+    private void manageToolbar() {
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setNoteForEdit() {
-        bundle = getArguments();
-        if (bundle != null) {
-            if ((this.paperNote = bundle.getParcelable(getContext().getString(Folders.GENERAL_NOTE.getFolder()))) != null) {
-                setFontFamily(this.paperNote.getFontFamily());
-                setFontSize(this.paperNote.getFontSize());
-                setNoteBackground(this.paperNote.getBackground());
-                noteTitle.setText(this.paperNote.getTitle());
-                noteArea.setText(this.paperNote.getNote());
-            }
+    private void getPaperNote(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            bundle = getArguments();
+            if (bundle != null) {
+                this.paperNote = bundle.getParcelable(getContext().getString(Folders.GENERAL_NOTE.getFolder()));
+            } else
+                initPaperNote();
+        } else {
+            this.paperNote = savedInstanceState.getParcelable(STATE);
+            this.bundle = new Bundle();
         }
+    }
+
+    private void initializeComponents(View view) {
+        noteTitle = (EditText) view.findViewById(R.id.noteTitle);
+        noteArea = (EditText) view.findViewById(R.id.noteArea);
+        noteColor = (RelativeLayout) view.findViewById(R.id.noteColor);
+        inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        noteArea.setOnClickListener(onClickListener);
+        noteTitle.setOnClickListener(onClickListener);
+    }
+
+    private void initPaperNote() {
+        this.paperNote = new PaperNote();
+        this.paperNote.setFontFamily(getContext().getString(R.string.heart_font));
+        this.paperNote.setFontSize(Constants.MEDIUM.getSizes());
+        this.paperNote.setBackground(R.drawable.note_white);
+    }
+
+    private void setPaperNote() {
+        setFontFamily(this.paperNote.getFontFamily());
+        setFontSize(this.paperNote.getFontSize());
+        setNoteBackground(this.paperNote.getBackground());
+        noteTitle.setText(this.paperNote.getTitle());
+        noteArea.setText(this.paperNote.getNote());
     }
 
     private void setFontFamily(String fontFamily) {
@@ -136,28 +133,10 @@ public class PaperNoteFragment extends AutoSaveFragment {
     }
 
     private void shareNote(PaperNote note) {
-        if (note != null){
+        if (note != null) {
             if (!note.getTitle().isEmpty() || !note.getNote().isEmpty())
                 new ShareNote().sharePaperNote(getActivity(), note);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (changeFontFamily(id))
-            return true;
-        else if (changeFontSize(id))
-            return true;
-        else if (changeNoteBackground(id))
-            return true;
-        else if (clickShareNote(id))
-            return true;
-        else if (saveBeforeClose(id)) {
-            return false;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private boolean changeFontFamily(int id) {
@@ -214,7 +193,7 @@ public class PaperNoteFragment extends AutoSaveFragment {
         }
     }
 
-    private boolean clickShareNote(int id){
+    private boolean clickShareNote(int id) {
         switch (id) {
             case R.id.share:
                 shareNote(this.paperNote);
@@ -254,10 +233,11 @@ public class PaperNoteFragment extends AutoSaveFragment {
             prepareNote();
             if (!this.paperNote.getTitle().equals("") || !this.paperNote.getNote().equals("")) {
                 if (bundle == null) {
-                    MyApplication.getNoteManager(getContext()).saveNote(this.paperNote);
+                    this.paperNote = (PaperNote) MyApplication.getNoteManager(getContext()).saveNote(this.paperNote);
                     bundle = new Bundle();
                 } else {
                     MyApplication.getNoteManager(getContext()).updateNote(this.paperNote);
+                    bundle = new Bundle();
                 }
             }
         }
@@ -269,9 +249,54 @@ public class PaperNoteFragment extends AutoSaveFragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.paper_note_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (changeFontFamily(id))
+            return true;
+        else if (changeFontSize(id))
+            return true;
+        else if (changeNoteBackground(id))
+            return true;
+        else if (clickShareNote(id))
+            return true;
+        else if (saveBeforeClose(id)) {
+            return false;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (!isVisibleToUser)
             save();
+
         super.setUserVisibleHint(isVisibleToUser);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        deactivateAutoSave();
+        save();
+        outState.putParcelable(STATE, this.paperNote);
+        super.onSaveInstanceState(outState);
+    }
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!toggle) {
+                inputMethodManager.toggleSoftInput(0, 1);
+            } else {
+                inputMethodManager.toggleSoftInput(1, 0);
+            }
+            toggle = !toggle;
+        }
+    };
 }
