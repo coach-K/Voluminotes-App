@@ -62,6 +62,8 @@
     <string name="trash_empty">Trash is empty</string>
     <string name="mime_html">text/html</string>
     <string name="share">Share</string>
+    <string name="deleted">Note Permanently Deleted</string>
+    <string name="undo">UNDO</string>
 
     <string-array name="fonts_array">
         <item>My Heart</item>

@@ -2,26 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:background="@drawable/header_background"
     android:gravity="center"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/app_name"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:scaleType="centerCrop"
-        android:src="@drawable/splash" />
-
-    <ImageView
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:contentDescription="@string/app_name"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/logo" />
+        android:src="@drawable/rlogo" />
 
 </RelativeLayout>
