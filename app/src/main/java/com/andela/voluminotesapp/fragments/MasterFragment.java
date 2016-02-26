@@ -83,5 +83,9 @@ public abstract class MasterFragment extends Fragment {
         this.fragmentRecyclerListener = fragmentRecyclerListener;
     }
 
+    public NotesRecyclerAdapter getNotesRecyclerAdapter() {
+        return notesRecyclerAdapter;
+    }
+
     public abstract void onFragmentViewCreated();
 }

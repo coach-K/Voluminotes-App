@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
     private SearchFragment searchFragment;
     private WelcomeFragment welcomeFragment;
     private Toolbar toolbar;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initializeComponents() {
+        view = findViewById(R.id.drawer_layout);
         deleteArea = (LinearLayout) findViewById(R.id.deleteArea);
         hideDelete();
 
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) view;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -337,7 +339,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNoteTouch(int type, int position) {
+    public void onNoteLongClick(int type, int position) {
         switch (type) {
             case NoteManager.NOTES:
                 showDelete();
@@ -376,7 +378,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNoteDelete(int type, boolean restore, Note note) {
+    public void onNoteDelete(int type, boolean restore, final Note note) {
         switch (type) {
             case NoteManager.NOTES:
                 MyApplication.getNoteManager(context).moveNoteToTrash(note);
@@ -384,8 +386,17 @@ public class MainActivity extends AppCompatActivity
             case NoteManager.TRASH:
                 if (restore) {
                     MyApplication.getNoteManager(context).restoreNoteFromTrash(note);
-                } else
+                } else {
                     MyApplication.getNoteManager(context).deleteFromTrash(note);
+                    MsgBox.show(view, getString(R.string.deleted), getString(R.string.undo),
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    MyApplication.getNoteManager(context).restoreNoteToTrash(note);
+                                    trashNoteListFragment.getNotesRecyclerAdapter().notifyDataSetChanged();
+                                }
+                            });
+                }
                 break;
             default:
                 break;

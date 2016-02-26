@@ -61,6 +61,10 @@ public class NoteManager {
         this.notes.addOrderedNote(note);
     }
 
+    public void restoreNoteToTrash(Note note) {
+        this.trashNotes.addNote(note);
+    }
+
     public void deleteFromTrash(Note note) {
         this.trashNotes.removeNote(note);
         this.noteDBWriter.deleteNote(note.getId());
