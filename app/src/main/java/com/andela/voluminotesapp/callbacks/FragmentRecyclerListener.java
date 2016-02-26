@@ -10,7 +10,7 @@ public interface FragmentRecyclerListener {
 
     void onNoteDelete(int type, boolean restore, Note note);
 
-    void onNoteTouch(int type, int position);
+    void onNoteLongClick(int type, int position);
 
     void onNoteClick(int type, int position, Note note);
 }

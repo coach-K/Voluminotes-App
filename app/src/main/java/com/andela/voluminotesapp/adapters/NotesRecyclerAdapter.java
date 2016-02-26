@@ -49,7 +49,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<MasterViewHolder>
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                fragmentRecyclerListener.onNoteTouch(type, position);
+                fragmentRecyclerListener.onNoteLongClick(type, position);
                 return false;
             }
         });
