@@ -11,12 +11,12 @@ The question is... How can this be solved?
 
 -------------
 
- ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/splash_.png?raw=true "Voluminotes")      | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/dashboard_.png?raw=true "Voluminotes")
+ ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/change.png?raw=true "Voluminotes")      | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/thedashboard.png?raw=true "Voluminotes")
 -------- | ---
-![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/new_note_.png?raw=true "Voluminotes")  | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/edit_note_.png?raw=true "Voluminotes") 
-![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/blue_note_.png?raw=true "Voluminotes")  | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/switch_note.png?raw=true "Voluminotes") 
-![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/drawer_.png?raw=true "Voluminotes")  | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/grid_delete_.png?raw=true "Voluminotes") 
-![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/linear_delete_.png?raw=true "Voluminotes")  | 
+![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/thenewnote.png?raw=true "Voluminotes")  | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/theeditnote.png?raw=true "Voluminotes")
+![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/thebluenote.png?raw=true "Voluminotes")  | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/change.png?raw=true "Voluminotes")
+![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/thedrawer.png?raw=true "Voluminotes")  | ![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/thegridview.png?raw=true "Voluminotes")
+![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/assets/images/thelistview.png?raw=true "Voluminotes")  |
 
 
 ----------
