@@ -1,6 +1,6 @@
 Checkpoint Three (Voluminotes)!
 ===================
-![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/logo.png?raw=true "Voluminotes") 
+![Alt text](https://github.com/andela-kogunde/Voluminotes-App/blob/master/app/src/main/res/drawable/rlogo.png?raw=true "Voluminotes")
 
 
 Today, as we carry on with our daily activities, we tend to plan towards every action and/or decision we make, the outcome *(success or failure)* eventually leads to a story, some we **record**, while some fades away, not because we want them to but because we write this stories on our **books, journal or paper** and as time goes by these materials get filled up, worn out or lost.
