@@ -11,6 +11,8 @@ public class PaperNote extends Note {
 
     public PaperNote() {
         super();
+        this.title = "";
+        this.note = "";
     }
 
     public PaperNote(String title, String note, String fontFamily, int fontSize, int background) {
