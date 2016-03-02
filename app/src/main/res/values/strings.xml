@@ -73,6 +73,7 @@
     <string name="note_saved">Note Saved</string>
     <string name="totrash">Note moved to trash</string>
     <string name="note_restored">Note successfully restored</string>
+    <string name="sample_description">The new Title \n is the way that \n your eyes \n hello there \n</string>
 
     <string-array name="fonts_array">
         <item>My Heart</item>
