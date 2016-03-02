@@ -31,14 +31,16 @@ public class SearchFilter extends Filter {
             for (Note note : this.notes) {
                 if (note instanceof PaperNote) {
                     PaperNote paperNote = (PaperNote) note;
+
                     if (paperNote.getTitle().trim().toLowerCase().contains(query)
                             || paperNote.getNote().trim().toLowerCase().contains(query)) {
                         this.notesRecyclerAdapter.getNotes().addNote(paperNote);
                     }
                 }
             }
-        } else
+        } else {
             this.notesRecyclerAdapter.getNotes().clear();
+        }
 
         return filterResults;
     }
