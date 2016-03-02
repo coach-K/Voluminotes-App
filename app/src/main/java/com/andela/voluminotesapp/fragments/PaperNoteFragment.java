@@ -104,8 +104,8 @@ public class PaperNoteFragment extends AutoSaveFragment {
 
     private void initPaperNote() {
         this.paperNote = new PaperNote();
-        this.paperNote.setFontFamily(getContext().getString(R.string.heart_font));
-        this.paperNote.setFontSize(Constants.MEDIUM.getSizes());
+        this.paperNote.setFontFamily(getContext().getString(R.string.roboto_font));
+        this.paperNote.setFontSize(Constants.SMALL.getSizes());
         this.paperNote.setBackground(R.drawable.note_white);
     }
 
@@ -150,6 +150,12 @@ public class PaperNoteFragment extends AutoSaveFragment {
                 return true;
             case R.id.heart:
                 setFontFamily(getContext().getString(R.string.heart_font));
+                return true;
+            case R.id.harabara:
+                setFontFamily(getContext().getString(R.string.harabara_font));
+                return true;
+            case R.id.calibri:
+                setFontFamily(getContext().getString(R.string.calibri_font));
                 return true;
             default:
                 return false;

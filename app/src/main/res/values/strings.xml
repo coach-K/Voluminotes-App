@@ -9,8 +9,6 @@
 
     <string name="close">Close</string>
     <string name="autosave">autosave</string>
-    <string name="heart_font">fonts/always_in_my_heart.ttf</string>
-    <string name="roboto_font">fonts/roboto.ttf</string>
     <string name="canceled">Note was canceled</string>
 
     <string name="plans">To-Do</string>
@@ -23,9 +21,17 @@
 
     <string name="grid">Grid</string>
 
+
+    <string name="roboto_font">fonts/roboto.ttf</string>
+    <string name="heart_font">fonts/always_in_my_heart.ttf</string>
+    <string name="harabara_font">fonts/harabara.ttf</string>
+    <string name="calibri_font">fonts/calibri.ttf</string>
+
     <string name="fontfamily">Font Family</string>
-    <string name="heart">Heart</string>
     <string name="roboto">Roboto</string>
+    <string name="heart">Heart</string>
+    <string name="harabara">Harabara</string>
+    <string name="calibri">Calibri</string>
 
     <string name="fontsize">Text Size</string>
     <string name="smallFont">Small</string>
