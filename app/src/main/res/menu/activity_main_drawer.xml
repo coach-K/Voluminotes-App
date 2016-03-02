@@ -17,7 +17,7 @@
             <item
                 android:id="@+id/nav_trash"
                 android:icon="@mipmap/trash_dark"
-                android:title="@string/trash" />
+                android:title="@string/viewtrash" />
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@mipmap/settings_dark"

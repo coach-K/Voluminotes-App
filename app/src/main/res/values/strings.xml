@@ -15,7 +15,8 @@
     <string name="voice_notes">Voice Notes</string>
     <string name="drawings">Paint</string>
     <string name="more">More</string>
-    <string name="trash">Trash</string>
+    <string name="trash">Empty Trash</string>
+    <string name="viewtrash">Trash</string>
     <string name="all_notes">All Notes</string>
     <string name="note">Note</string>
 

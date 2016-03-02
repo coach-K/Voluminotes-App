@@ -68,7 +68,7 @@ public class WelcomeAdapter extends RecyclerView.Adapter<WelcomeItem> {
                         MyApplication.getNoteManager(context).getNotesSize())));
 
         mItems.add(new Welcome(Pages.VIEW_TRASH, R.mipmap.trash, R.color.note_blue,
-                String.format("%s (%s)", context.getString(R.string.trash),
+                String.format("%s (%s)", context.getString(R.string.viewtrash),
                         MyApplication.getNoteManager(context).getTrashNotesSize())));
 
         mItems.add(new Welcome(Pages.VIEW_SETTINGS, R.mipmap.ic_settings, R.color.note_pink,

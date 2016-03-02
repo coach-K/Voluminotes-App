@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity
                 setMenu(R.menu.note_list_menu, menu);
                 break;
             case Pages.TRASH:
-                setMenu(R.menu.trash_menu, menu);
+                getMenuInflater().inflate(R.menu.trash_menu, menu);
                 break;
         }
         return true;
