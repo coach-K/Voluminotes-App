@@ -70,6 +70,9 @@
     <string name="share">Share</string>
     <string name="deleted">Note Permanently Deleted</string>
     <string name="undo">UNDO</string>
+    <string name="note_saved">Note Saved</string>
+    <string name="totrash">Note moved to trash</string>
+    <string name="note_restored">Note successfully restored</string>
 
     <string-array name="fonts_array">
         <item>My Heart</item>

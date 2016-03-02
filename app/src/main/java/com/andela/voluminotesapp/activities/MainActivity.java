@@ -383,10 +383,12 @@ public class MainActivity extends AppCompatActivity
         switch (type) {
             case NoteManager.NOTES:
                 noteManager().moveNoteToTrash(note);
+                MsgBox.show(context, getString(R.string.totrash));
                 break;
             case NoteManager.TRASH:
                 if (restore) {
                     noteManager().restoreNoteFromTrash(note);
+                    MsgBox.show(context, getString(R.string.note_restored));
                 } else {
                     noteManager().deleteFromTrash(note);
                     MsgBox.show(view, getString(R.string.deleted), getString(R.string.undo),

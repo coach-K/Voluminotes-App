@@ -25,6 +25,7 @@ import com.andela.voluminotesapp.R;
 import com.andela.voluminotesapp.activities.MyApplication;
 import com.andela.voluminotesapp.callbacks.AutoSaveCallback;
 import com.andela.voluminotesapp.config.Constants;
+import com.andela.voluminotesapp.utilities.MsgBox;
 import com.andela.voluminotesapp.utilities.ShareNote;
 
 
@@ -217,6 +218,7 @@ public class PaperNoteFragment extends AutoSaveFragment {
         switch (id) {
             case android.R.id.home:
                 saveNote();
+                MsgBox.show(getContext(), getActivity().getString(R.string.note_saved));
                 return true;
             default:
                 return false;
