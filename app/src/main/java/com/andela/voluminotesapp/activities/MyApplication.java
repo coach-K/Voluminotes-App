@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.andela.notelib.note.NoteManager;
+import com.andela.voluminotesapp.config.Constants;
 import com.andela.voluminotesapp.utilities.ApplicationExit;
 
 
@@ -14,7 +15,7 @@ public class MyApplication extends Application {
     public static NoteManager getNoteManager(Context context) {
         if (noteManager == null) {
             try {
-                noteManager = new NoteManager(context, "sandrianactivity");
+                noteManager = new NoteManager(context, Constants.VOLUMINOTES_TABLE.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }

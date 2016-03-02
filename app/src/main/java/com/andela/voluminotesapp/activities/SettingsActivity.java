@@ -33,7 +33,8 @@ public class SettingsActivity extends AppCompatActivity {
         toolbarTitle.setTypeface(alwaysInMyHeart);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

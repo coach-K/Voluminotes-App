@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initialLaunch() {
-        if (MyApplication.getNoteManager(context).getNotesSize() == 0) {
+        if (noteManager().getNotesSize() == 0) {
             Pages.CURRENT = Pages.WELCOME;
             welcomeFragment.setWelcomeListener(this);
             addFragment(welcomeFragment);
@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity
                 launchScreen(Pages.ALL_NOTES_GRID);
                 break;
             case R.id.trashItem:
-                if (!(MyApplication.getNoteManager(context).isTrashNotesEmpty())) {
+                if (!noteManager().isTrashNotesEmpty()) {
                     trashNoteDialog(getString(R.string.empty_message), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -332,8 +332,9 @@ public class MainActivity extends AppCompatActivity
         new Collision(viewHolder.itemView, deleteArea).intersect(new OnIntersectListener() {
             @Override
             public void onIntersect() {
-                if (fromPosition != -1)
+                if (fromPosition != -1) {
                     noteGridFragment.deleteNote(fromPosition);
+                }
             }
         });
     }
@@ -374,25 +375,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     private int getNotePosition(Note note) {
-        return MyApplication.getNoteManager(context).getNotePosition(note);
+        return noteManager().getNotePosition(note);
     }
 
     @Override
     public void onNoteDelete(int type, boolean restore, final Note note) {
         switch (type) {
             case NoteManager.NOTES:
-                MyApplication.getNoteManager(context).moveNoteToTrash(note);
+                noteManager().moveNoteToTrash(note);
                 break;
             case NoteManager.TRASH:
                 if (restore) {
-                    MyApplication.getNoteManager(context).restoreNoteFromTrash(note);
+                    noteManager().restoreNoteFromTrash(note);
                 } else {
-                    MyApplication.getNoteManager(context).deleteFromTrash(note);
+                    noteManager().deleteFromTrash(note);
                     MsgBox.show(view, getString(R.string.deleted), getString(R.string.undo),
                             new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    MyApplication.getNoteManager(context).restoreNoteToTrash(note);
+                                    noteManager().restoreNoteToTrash(note);
                                     trashNoteListFragment.getNotesRecyclerAdapter().notifyDataSetChanged();
                                 }
                             });
@@ -413,8 +414,9 @@ public class MainActivity extends AppCompatActivity
     private void showDelete() {
         deleteArea.setVisibility(View.VISIBLE);
         Vibrator vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
-        if (vibrator.hasVibrator())
+        if (vibrator.hasVibrator()) {
             vibrator.vibrate(VIBRATE);
+        }
     }
 
     private void hideDelete() {
@@ -449,7 +451,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onPause() {
-        MyApplication.getNoteManager(getBaseContext()).saveChanges();
+        noteManager().saveChanges();
         super.onPause();
+    }
+
+    private NoteManager noteManager() {
+        return MyApplication.getNoteManager(context);
     }
 }
