@@ -18,8 +18,9 @@ public class NoteGridFragment extends MasterFragment {
                 R.layout.grid_item,
                 NoteManager.NOTES);
 
-        if (MyApplication.getNoteManager(getContext()).isNotesEmpty())
+        if (MyApplication.getNoteManager(getContext()).isNotesEmpty()) {
             showNoFeed(getActivity().getString(R.string.notdisplay), R.mipmap.pencil_dark);
+        }
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
     }

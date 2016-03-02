@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.andela.notelib.note.Folders;
+import com.andela.notelib.note.NoteManager;
 import com.andela.notelib.note.PaperNote;
 import com.andela.voluminotesapp.R;
 import com.andela.voluminotesapp.activities.MyApplication;
@@ -73,8 +74,9 @@ public class PaperNoteFragment extends AutoSaveFragment {
     private void manageToolbar() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null)
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void getPaperNote(@Nullable Bundle savedInstanceState) {
@@ -82,8 +84,9 @@ public class PaperNoteFragment extends AutoSaveFragment {
             bundle = getArguments();
             if (bundle != null) {
                 this.paperNote = bundle.getParcelable(getContext().getString(Folders.GENERAL_NOTE.getFolder()));
-            } else
+            } else {
                 initPaperNote();
+            }
         } else {
             this.paperNote = savedInstanceState.getParcelable(STATE);
             this.bundle = new Bundle();
@@ -134,8 +137,9 @@ public class PaperNoteFragment extends AutoSaveFragment {
 
     private void shareNote(PaperNote note) {
         if (note != null) {
-            if (!note.getTitle().isEmpty() || !note.getNote().isEmpty())
+            if (!note.getTitle().isEmpty() || !note.getNote().isEmpty()) {
                 new ShareNote().sharePaperNote(getActivity(), note);
+            }
         }
     }
 
@@ -233,10 +237,10 @@ public class PaperNoteFragment extends AutoSaveFragment {
             prepareNote();
             if (!this.paperNote.getTitle().equals("") || !this.paperNote.getNote().equals("")) {
                 if (bundle == null) {
-                    this.paperNote = (PaperNote) MyApplication.getNoteManager(getContext()).saveNote(this.paperNote);
+                    this.paperNote = (PaperNote) noteManager().saveNote(this.paperNote);
                     bundle = new Bundle();
                 } else {
-                    MyApplication.getNoteManager(getContext()).updateNote(this.paperNote);
+                    noteManager().updateNote(this.paperNote);
                     bundle = new Bundle();
                 }
             }
@@ -244,8 +248,9 @@ public class PaperNoteFragment extends AutoSaveFragment {
     }
 
     private void cancelNote() {
-        if (bundle != null)
-            MyApplication.getNoteManager(getContext()).deleteNote(this.paperNote);
+        if (bundle != null) {
+            noteManager().deleteNote(this.paperNote);
+        }
     }
 
     @Override
@@ -257,15 +262,15 @@ public class PaperNoteFragment extends AutoSaveFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (changeFontFamily(id))
+        if (changeFontFamily(id)) {
             return true;
-        else if (changeFontSize(id))
+        } else if (changeFontSize(id)) {
             return true;
-        else if (changeNoteBackground(id))
+        } else if (changeNoteBackground(id)) {
             return true;
-        else if (clickShareNote(id))
+        } else if (clickShareNote(id)) {
             return true;
-        else if (saveBeforeClose(id)) {
+        } else if (saveBeforeClose(id)) {
             return false;
         }
 
@@ -274,8 +279,9 @@ public class PaperNoteFragment extends AutoSaveFragment {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-        if (!isVisibleToUser)
+        if (!isVisibleToUser) {
             save();
+        }
 
         super.setUserVisibleHint(isVisibleToUser);
     }
@@ -299,4 +305,8 @@ public class PaperNoteFragment extends AutoSaveFragment {
             toggle = !toggle;
         }
     };
+
+    private NoteManager noteManager() {
+        return MyApplication.getNoteManager(getContext());
+    }
 }

@@ -22,8 +22,9 @@ public class TrashNoteListFragment extends MasterFragment {
                 R.layout.linear_item,
                 NoteManager.TRASH);
 
-        if (MyApplication.getNoteManager(getContext()).isTrashNotesEmpty())
+        if (MyApplication.getNoteManager(getContext()).isTrashNotesEmpty()) {
             showNoFeed(getActivity().getString(R.string.trashempty), R.mipmap.trash_dark);
+        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

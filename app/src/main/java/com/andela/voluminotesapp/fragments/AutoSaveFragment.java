@@ -19,13 +19,15 @@ public abstract class AutoSaveFragment extends Fragment {
 
     public void setAutoSaveListener(final AutoSaveCallback callback) {
         setTime = getSetTime();
-        if (setTime != 0)
+        if (setTime != 0) {
             this.callback = callback;
+        }
     }
 
     public void deactivateAutoSave() {
-        if (setTime != 0)
+        if (setTime != 0) {
             timer.cancel();
+        }
     }
 
     public void activateAutoSave() {

@@ -1,13 +1,6 @@
 package com.andela.voluminotesapp.fragments;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.andela.notelib.note.NoteList;
 import com.andela.notelib.note.NoteManager;
@@ -35,7 +28,8 @@ public class SearchFragment extends MasterFragment {
     }
 
     public void onQueryTextChange(CharSequence sequence) {
-        if (searchFilter != null)
+        if (searchFilter != null) {
             searchFilter.filter(sequence);
+        }
     }
 }
